@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>БОРТОВИЙ ЖУРНАЛ | MOTO WARRIOR</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        /* Додаткові стилі саме для цієї сторінки, щоб не ламати інші */
+        .fact-card {
+            background: #111;
+            border-left: 5px solid var(--red);
+            margin-bottom: 30px;
+            padding: 30px;
+            position: relative;
+            transition: 0.3s;
+            overflow: hidden;
+        }
+        .fact-card:hover {
+            background: #1a1a1a;
+            transform: scale(1.02);
+        }
+        .fact-number {
+            position: absolute;
+            right: -10px;
+            bottom: -20px;
+            font-size: 8rem;
+            font-family: 'Oswald';
+            color: rgba(255, 0, 0, 0.05);
+            font-weight: 900;
+            z-index: 0;
+        }
+        .fact-content {
+            position: relative;
+            z-index: 1;
+        }
+        .fact-tag {
+            color: var(--red);
+            text-transform: uppercase;
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .fact-card h2 {
+            font-family: 'Oswald';
+            text-transform: uppercase;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        .fact-card p {
+            color: #bbb;
+            font-size: 1.1rem;
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body class="sub-page">
+
+    <header>
+        <nav class="container">
+            <div class="logo">MOTO<span>WARRIOR</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="legends.html">Легенди</a></li>
+                <li><a href="why.html">Що треба щоб керувати мотоцикл?</a></li>
+                <li><a href="facts.html" class="active">Факти</a></li>
+                <li><a href="catalog.html">Топ 3 Байків</a></li>
+                <li><a href="https://auto.ria.com/uk/moto/" target="_blank">Auto.ria</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        <h1 class="page-title">Бортовий журнал: Цікаве</h1>
+
+        <div class="fact-card">
+            <div class="fact-number">01</div>
+            <div class="fact-content">
+                <span class="fact-tag">Технології</span>
+                <h2>Перший байк був дерев'яним</h2>
+                <p>У 1885 році Готліб Даймлер створив "Reitwagen". Він мав дерев’яну раму і навіть колеса були з дерева, оббиті залізом. Швидкість була всього 12 км/год.</p>
+            </div>
+        </div>
+
+        <div class="fact-card">
+            <div class="fact-number">02</div>
+            <div class="fact-content">
+                <span class="fact-tag">Швидкість</span>
+                <h2>Легендарний Suzuki Hayabusa</h2>
+                <p>Цей байк названий на честь японського сапсана. Він став першим серійним мотоциклом, що подолав бар'єр у 300 км/год, змусивши виробників ввести "джентльменську угоду" про обмеження швидкості.</p>
+            </div>
+        </div>
+
+        <div class="fact-card">
+            <div class="fact-number">03</div>
+            <div class="fact-content">
+                <span class="fact-tag">Життя</span>
+                <h2>8 замість 1</h2>
+                <p>Мотоцикли — порятунок для великих міст. На одному стандартному паркомісці для автомобіля можна легально та безпечно розмістити до 8 середніх мотоциклів.</p>
+            </div>
+        </div>
+
+        <div class="fact-card">
+            <div class="fact-number">04</div>
+            <div class="fact-content">
+                <span class="fact-tag">Стиль</span>
+                <h2>Чому косуха?</h2>
+                <p>Шкіряні куртки стали популярними не через моду. Шкіра — це найкращий захист від "асфальтної хвороби" при падінні. Першу спеціальну куртку "Perfecto" створили ще у 1928 році.</p>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
