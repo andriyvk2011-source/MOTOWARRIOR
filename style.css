@@ -189,3 +189,59 @@ header {
     font-size: 0.95rem;
     line-height: 1.6;
 }
+/* Робимо фон темним, а мотоцикл приглушеним */
+.main-bg {
+  background-color: #000000 !important;
+}
+
+.bg-img {
+  opacity: 0.35 !important;
+}
+
+.overlay {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%) !important;
+}
+
+/* Налаштування для самих вкладок меню */
+.nav-links li {
+  opacity: 0; /* Спочатку вони повністю невидимі у темряві */
+  animation-name: appearFromDark;
+  animation-duration: 1s; /* Тривалість проявлення однієї кнопки */
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards; /* Щоб кнопка залишалася видимою після анімації */
+}
+
+/* Сама логіка плавного виходу з темряви */
+@keyframes appearFromDark {
+  from {
+    opacity: 0;
+    filter: blur(10px); /* Починається з сильного розмиття */
+    transform: translateY(-5px); /* Злегка опускається зверху */
+  }
+  to {
+    opacity: 1;
+    filter: blur(0); /* Стає чітким */
+    transform: translateY(0);
+  }
+}
+.btn-back {
+  display: inline-block;
+  padding: 12px 32px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ff6600; /* Твій фірмовий помаранчевий колір */
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  transition: all 0.3s ease-in-out;
+  border-radius: 4px;
+}
+
+.btn-back:hover {
+  background-color: #ff6600;
+  color: #000000;
+  box-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
+  transform: translateY(-3px);
+}
