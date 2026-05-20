@@ -6,6 +6,35 @@
     <title>MOTO WARRIOR | Головна</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+    <style>
+        /* Анімація плавного проявлення з темряви */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px); /* Легкий ефект підйому */
+                filter: brightness(0); /* Починається з повної темряви */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: brightness(1); /* Проявляється до нормальної яскравості */
+            }
+        }
+
+        /* Застосовуємо анімацію до заголовка */
+        .main-title {
+            opacity: 0; /* Початковий стан до старту анімації */
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 0.5s; /* Заголовок з'являється трохи швидше */
+        }
+
+        /* Застосовуємо анімацію до цитати */
+        .quote-box {
+            opacity: 0;
+            animation: fadeIn 2s ease-out forwards;
+            animation-delay: 1.2s; /* Цитата плавно випливає трохи пізніше за заголовок */
+        }
+    </style>
 </head>
 
 <body class="home-body">
@@ -19,12 +48,13 @@
         <nav class="container">
             <div class="logo">MOTO<span>WARRIOR</span></div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Головна</a></li>
-                <li><a href="legends.html">Легенди</a></li>
-                <li><a href="why.html">Що треба щоб керувати мотоцикл?</a></li>
-                <li><a href="facts.html">Факти</a></li>
-                <li><a href="catalog.html">Топ 3 Байків</a></li>
-                <li><a href="https://auto.ria.com/uk/moto/" target="_blank">Auto.ria</a></li>
+                <!-- Кожна вкладка з'являється на 0.3 секунди пізніше за попередню -->
+                <li style="animation-delay: 0.1s;"><a href="index.html" class="active">Головна</a></li>
+                <li style="animation-delay: 0.4s;"><a href="legends.html">Легенди</a></li>
+                <li style="animation-delay: 0.7s;"><a href="why.html">Що треба щоб керувати мотоцикл?</a></li>
+                <li style="animation-delay: 1.0s;"><a href="facts.html">Факти</a></li>
+                <li style="animation-delay: 1.3s;"><a href="catalog.html">Топ 3 Байків</a></li>
+                <li style="animation-delay: 1.6s;"><a href="https://auto.ria.com/uk/moto/" target="_blank">Auto.ria</a></li>
             </ul>
         </nav>
     </header>
@@ -35,10 +65,6 @@
             
             <div class="quote-box">
                 <p>«Чотири колеса возять тіло, а два — душу.»</p>
-            </div>
-
-            <div class="hero-btn-container">
-                <a href="catalog.html" class="btn-primary">Увійти в гараж</a>
             </div>
         </div>
     </main>
