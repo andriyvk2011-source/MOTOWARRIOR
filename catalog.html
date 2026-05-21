@@ -7,56 +7,115 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root { --red: #ff0000; --bg: #050505; --card: #111; --green: #00ff66; }
-        body { background: var(--bg); color: #fff; margin: 0; font-family: 'Montserrat', sans-serif; }
         
+        html, body { height: 100%; margin: 0; background: var(--bg); color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden; }
+        body { display: flex; flex-direction: column; justify-content: space-between; }
+
         header { 
-            position: sticky; top: 0; background: #000; padding: 15px 5%; 
+            background: #000; padding: 10px 5%; 
             border-bottom: 2px solid var(--red); z-index: 1000; display: flex; 
             justify-content: space-between; align-items: center;
+            height: 50px; box-sizing: border-box;
         }
-        .back-btn { color: #fff; text-decoration: none; font-family: 'Oswald'; text-transform: uppercase; border: 1px solid var(--red); padding: 8px 15px; transition: 0.3s; }
+        .back-btn { color: #fff; text-decoration: none; font-family: 'Oswald'; text-transform: uppercase; border: 1px solid var(--red); padding: 5px 12px; transition: 0.3s; font-size: 0.9rem; }
         .back-btn:hover { background: var(--red); }
-        .logo { font-family: 'Oswald'; font-size: 24px; text-transform: uppercase; color: #fff; text-decoration: none; }
+        .logo { font-family: 'Oswald'; font-size: 22px; text-transform: uppercase; color: #fff; text-decoration: none; }
         .logo span { color: var(--red); }
 
-        .wrapper { max-width: 950px; margin: 40px auto; padding: 0 20px; }
-        h1 { font-family: 'Oswald'; font-size: 3.5rem; text-align: center; margin-bottom: 50px; text-transform: uppercase; letter-spacing: 2px; }
+        .wrapper { max-width: 800px; width: 100%; margin: auto; padding: 0 20px; position: relative; box-sizing: border-box; }
+        h1 { font-family: 'Oswald'; font-size: 2.2rem; text-align: center; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
 
-        .card { background: var(--card); margin-bottom: 80px; border-radius: 20px; overflow: hidden; border: 1px solid #222; position: relative; }
-        
-        .img-box { width: 100%; height: 500px; background: #1a1a1a; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+        .slider-relative { position: relative; width: 100%; display: flex; align-items: center; }
 
-        .info { padding: 40px; }
-        .info h2 { font-family: 'Oswald'; font-size: 2.8rem; margin: 0 0 25px 0; color: #fff; text-transform: uppercase; }
+        .slider-container {
+            overflow: hidden;
+            width: 100%;
+            border-radius: 20px;
+            border: 1px solid #222;
+            background: var(--card);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            width: 100%;
+        }
+
+        .card { 
+            flex: 0 0 100%;
+            width: 100%;
+            box-sizing: border-box;
+        }
         
-        /* Специфікації */
+        .img-box { width: 100%; height: 280px; background: #1a1a1a; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .info { padding: 20px 30px; background: var(--card); }
+        .info h2 { font-family: 'Oswald'; font-size: 1.8rem; margin: 0 0 12px 0; color: #fff; text-transform: uppercase; }
+        
         .specs-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
-            gap: 20px; 
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+            gap: 10px; 
             background: #000;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 15px;
+            border-radius: 12px;
             border: 1px solid #1a1a1a;
         }
-        .s-item { border-left: 3px solid var(--red); padding-left: 15px; }
-        .s-item span { display: block; color: #666; font-size: 0.75rem; text-transform: uppercase; font-weight: 900; margin-bottom: 8px; }
-        .s-item strong { font-family: 'Oswald'; font-size: 1.3rem; color: #fff; letter-spacing: 0.5px; }
+        .s-item { border-left: 3px solid var(--red); padding-left: 8px; }
+        .s-item span { display: block; color: #666; font-size: 0.7rem; text-transform: uppercase; font-weight: 900; margin-bottom: 3px; }
+        .s-item strong { font-family: 'Oswald'; font-size: 1rem; color: #fff; }
 
         .price-tag { 
-            margin-top: 30px; 
+            margin-top: 15px; 
             font-family: 'Oswald'; 
-            font-size: 2.2rem; 
+            font-size: 1.6rem; 
             color: var(--green); 
             text-align: right;
-            text-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
         }
 
-        @media (max-width: 600px) { 
-            .img-box { height: 300px; } 
-            .specs-grid { grid-template-columns: 1fr 1fr; padding: 20px; }
-            h1 { font-size: 2.5rem; }
+        /* Стрілки чітко по центру */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid var(--red);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-family: 'Oswald';
+            font-size: 20px;
+            z-index: 10;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-btn:hover { background: var(--red); box-shadow: 0 0 15px var(--red); }
+        
+        .prev-btn { left: -65px; }
+        .next-btn { right: -65px; }
+
+        .dots-container { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+        .dot { width: 9px; height: 9px; background: #333; border-radius: 50%; cursor: pointer; transition: 0.3s; }
+        .dot.active { background: var(--red); transform: scale(1.2); }
+
+        footer {
+            text-align: center; padding: 15px; color: #222; font-family: 'Oswald'; letter-spacing: 3px; font-size: 0.9rem;
+        }
+
+        @media (max-width: 950px) {
+            .prev-btn { left: 10px; }
+            .next-btn { right: 10px; }
+        }
+        @media (max-width: 600px) {
+            .img-box { height: 180px; }
+            .info h2 { font-size: 1.4rem; }
+            .specs-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -70,66 +129,89 @@
 <div class="wrapper">
     <h1>TOP 3 MACHINES</h1>
 
-    <div class="card">
-        <div class="img-box">
-            <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=1200" alt="Ducati Panigale">
-        </div>
-        <div class="info">
-            <h2>Ducati Panigale V4 S</h2>
-            <div class="specs-grid">
-                <div class="s-item"><span>Двигун</span><strong>V4 Desmosedici</strong></div>
-                <div class="s-item"><span>Об'єм</span><strong>1103 см³</strong></div>
-                <div class="s-item"><span>Потужність</span><strong>214 к.с.</strong></div>
-                <div class="s-item"><span>Розгін 0-100</span><strong>3.1 сек</strong></div>
-                <div class="s-item"><span>Привід</span><strong>Ланцюг</strong></div>
-                <div class="s-item"><span>Коробка</span><strong>6-ступ. Quickshift</strong></div>
+    <div class="slider-relative">
+        <button class="nav-btn prev-btn" id="prevBtn">←</button>
+        <button class="nav-btn next-btn" id="nextBtn">→</button>
+
+        <div class="slider-container">
+            <div class="slider-track" id="sliderTrack">
+
+                <div class="card">
+                    <div class="img-box">
+                        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?q=80&w=1200" alt="Ducati Panigale">
+                    </div>
+                    <div class="info">
+                        <h2>Ducati Panigale V4 S</h2>
+                        <div class="specs-grid">
+                            <div class="s-item"><span>Двигун</span><strong>V4 Desmosedici</strong></div>
+                            <div class="s-item"><span>Об'єм</span><strong>1103 см³</strong></div>
+                            <div class="s-item"><span>Потужність</span><strong>214 к.с.</strong></div>
+                            <div class="s-item"><span>Розгін 0-100</span><strong>3.1 сек</strong></div>
+                            <div class="s-item"><span>Привід</span><strong>Ланцюг</strong></div>
+                            <div class="s-item"><span>Коробка</span><strong>6-ступ. Quickshift</strong></div>
+                        </div>
+                        <div class="price-tag">$32,000</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="img-box">
+                        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200" alt="Harley Davidson Fat Boy">
+                    </div>
+                    <div class="info">
+                        <h2>H-D Fat Boy 114</h2>
+                        <div class="specs-grid">
+                            <div class="s-item"><span>Двигун</span><strong>Milwaukee-Eight 114</strong></div>
+                            <div class="s-item"><span>Об'єм</span><strong>1868 см³</strong></div>
+                            <div class="s-item"><span>Потужність</span><strong>94 к.с.</strong></div>
+                            <div class="s-item"><span>Розгін 0-100</span><strong>4.4 сек</strong></div>
+                            <div class="s-item"><span>Привід</span><strong>Ремінь</strong></div>
+                            <div class="s-item"><span>Коробка</span><strong>6-ступ. Cruise</strong></div>
+                        </div>
+                        <div class="price-tag">$26,500</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="img-box">
+                        <img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?q=80&w=1200" alt="BMW R1250 GS">
+                    </div>
+                    <div class="info">
+                        <h2>BMW R1250 GS</h2>
+                        <div class="specs-grid">
+                            <div class="s-item"><span>Двигун</span><strong>Boxer ShiftCam</strong></div>
+                            <div class="s-item"><span>Об'єм</span><strong>1254 см³</strong></div>
+                            <div class="s-item"><span>Потужність</span><strong>136 к.с.</strong></div>
+                            <div class="s-item"><span>Розгін 0-100</span><strong>3.6 сек</strong></div>
+                            <div class="s-item"><span>Привід</span><strong>Кардан</strong></div>
+                            <div class="s-item"><span>Коробка</span><strong>6-ступ. Constant</strong></div>
+                        </div>
+                        <div class="price-tag">$24,900</div>
+                    </div>
+                </div>
+
             </div>
-            <div class="price-tag">$32,000</div>
         </div>
     </div>
 
-    <div class="card">
-        <div class="img-box">
-            <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=1200" alt="Harley Davidson Fat Boy">
-        </div>
-        <div class="info">
-            <h2>H-D Fat Boy 114</h2>
-            <div class="specs-grid">
-                <div class="s-item"><span>Двигун</span><strong>Milwaukee-Eight 114</strong></div>
-                <div class="s-item"><span>Об'єм</span><strong>1868 см³</strong></div>
-                <div class="s-item"><span>Потужність</span><strong>94 к.с.</strong></div>
-                <div class="s-item"><span>Розгін 0-100</span><strong>4.4 сек</strong></div>
-                <div class="s-item"><span>Привід</span><strong>Ремінь</strong></div>
-                <div class="s-item"><span>Коробка</span><strong>6-ступ. Cruise</strong></div>
-            </div>
-            <div class="price-tag">$26,500</div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="img-box">
-            <img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?q=80&w=1200" alt="BMW R1250 GS">
-        </div>
-        <div class="info">
-            <h2>BMW R1250 GS</h2>
-            <div class="specs-grid">
-                <div class="s-item"><span>Двигун</span><strong>Boxer ShiftCam</strong></div>
-                <div class="s-item"><span>Об'єм</span><strong>1254 см³</strong></div>
-                <div class="s-item"><span>Потужність</span><strong>136 к.с.</strong></div>
-                <div class="s-item"><span>Розгін 0-100</span><strong>3.6 сек</strong></div>
-                <div class="s-item"><span>Привід</span><strong>Кардан</strong></div>
-                <div class="s-item"><span>Коробка</span><strong>6-ступ. Constant</strong></div>
-            </div>
-            <div class="price-tag">$24,900</div>
-        </div>
-    </div>
-
+    <div class="dots-container" id="dotsContainer"></div>
 </div>
 
-<footer style="text-align: center; padding: 60px; color: #222; font-family: 'Oswald'; letter-spacing: 3px;">
+<footer>
     MOTO WARRIOR // UKRAINE 2026 // Вознюк Андрій
 </footer>
 
-</body>
-</html>
-		
+<script>
+    const track = document.getElementById('sliderTrack');
+    const cards = document.querySelectorAll('.card');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('dotsContainer');
+
+    let currentIndex = 0;
+    const totalSlides = cards.length;
+    let autoSlideInterval;
+
+    cards.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('
