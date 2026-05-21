@@ -8,7 +8,7 @@
     <style>
         :root { --red: #ff0000; --bg: #050505; --card: #111; --green: #00ff66; }
         
-        html, body { height: 100%; margin: 0; background: var(--bg); color: #fff; font-family: 'Montserrat', sans-serif; overflow: hidden; }
+        html, body { height: 100%; margin: 0; background: var(--bg); color: #fff; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
         body { display: flex; flex-direction: column; justify-content: space-between; }
 
         header { 
@@ -22,7 +22,7 @@
         .logo { font-family: 'Oswald'; font-size: 22px; text-transform: uppercase; color: #fff; text-decoration: none; }
         .logo span { color: var(--red); }
 
-        .wrapper { max-width: 800px; width: 100%; margin: auto; padding: 0 20px; position: relative; box-sizing: border-box; }
+        .wrapper { max-width: 800px; width: 100%; margin: auto; padding: 20px; position: relative; box-sizing: border-box; }
         h1 { font-family: 'Oswald'; font-size: 2.2rem; text-align: center; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
 
         .slider-relative { position: relative; width: 100%; display: flex; align-items: center; }
@@ -75,7 +75,6 @@
             text-align: right;
         }
 
-        /* Стрілки чітко по центру */
         .nav-btn {
             position: absolute;
             top: 50%;
@@ -212,6 +211,62 @@
     const totalSlides = cards.length;
     let autoSlideInterval;
 
+    // Створення точок
     cards.forEach((_, index) => {
         const dot = document.createElement('div');
-        dot.classList.add('
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            goToSlide(index);
+            resetAutoSlide(); // Скидаємо 5 секунд спокою спочатку при ручному виборі
+        });
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function goToSlide(index) {
+        if (index < 0) {
+            currentIndex = totalSlides - 1;
+        } else if (index >= totalSlides) {
+            currentIndex = 0;
+        } else {
+            currentIndex = index;
+        }
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[currentIndex].classList.add('active');
+    }
+
+    nextBtn.addEventListener('click', () => {
+        goToSlide(currentIndex + 1);
+        resetAutoSlide();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        goToSlide(currentIndex - 1);
+        resetAutoSlide();
+    });
+
+    // Запуск таймера на 5 секунд
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            goToSlide(currentIndex + 1);
+        }, 5000);
+    }
+
+    // Скидання відліку, коли користувач щось натиснув (щоб він отримав нові 5 секунд спокою)
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        startAutoSlide();
+    }
+
+    startAutoSlide();
+
+    window.addEventListener('resize', () => {
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    });
+</script>
+
+</body>
+</html>
